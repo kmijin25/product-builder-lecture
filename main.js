@@ -59,6 +59,21 @@ customElements.define('lotto-ball', LottoBall);
 
 const lottoNumbersDiv = document.getElementById('lotto-numbers');
 const generateBtn = document.getElementById('generate-btn');
+const themeToggle = document.getElementById('theme-toggle');
+
+// 테마 초기화
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    document.body.classList.add('dark-mode');
+    themeToggle.textContent = '라이트 모드';
+}
+
+themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    themeToggle.textContent = isDark ? '라이트 모드' : '다크 모드';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
 
 function generateLottoNumbers() {
     const numbers = new Set();
